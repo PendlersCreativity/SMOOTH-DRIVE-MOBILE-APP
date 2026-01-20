@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smooth-Drive Host</title>
+<link rel="manifest" href="manifest.json">
+
+<style>
+body{margin:0;font-family:Arial;background:#020617;color:#fff}
+.app{padding:20px}
+input,button{
+width:100%;padding:15px;margin-top:12px;
+border:none;border-radius:10px;font-size:16px
+}
+.accept{background:#22c55e;color:#fff}
+.reject{background:#ef4444;color:#fff}
+</style>
+
+<script>
+if(screen.width > 768){
+document.body.innerHTML="<h2 style='text-align:center;margin-top:40px'>📱 Phone only</h2>";
+}
+</script>
+</head>
+
+<body>
+<div class="app">
+<h2>🧑‍✈️ Smooth-Drive Host</h2>
+
+<input id="client" placeholder="Customer Phone">
+<input id="price" placeholder="Trip Price (₦)">
+<input id="eta" placeholder="ETA (e.g 10 mins)">
+
+<button class="accept" onclick="accept()">Accept Ride</button>
+<button class="reject" onclick="reject()">Reject Ride</button>
+</div>
+
+<script>
+function accept(){
+let msg =
+`✅ Smooth-Drive Ride Accepted
+Price: ₦${price.value}
+ETA: ${eta.value}
+
+Reply YES to confirm.`;
+
+window.location =
+`https://wa.me/${client.value}?text=${encodeURIComponent(msg)}`;
+}
+
+function reject(){
+window.location =
+`https://wa.me/${client.value}?text=${encodeURIComponent("❌ No driver available at the moment.")}`;
+}
+</script>
+</body>
+</html>
